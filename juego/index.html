@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Piedra, papel y tijera</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+</head>
+
+<body>
+    <section id="game-zone">
+        <figure>
+            <figcaption>Jugador</figcaption>
+            <img src="images/rock.png" alt="Elección del jugador" id="playerChoice" />
+        </figure>
+        <figure>
+            <figcaption>Computadora</figcaption>
+            <img src="images/rock.png" alt="Elección del computador" id="computerChoice" />
+        </figure>
+    </section>
+    <p id="result">
+    </p>
+    <p id="score">
+    </p>
+    <section>
+        <p>Escoge una opción</p>
+        <button data-choice="piedra">
+            <img src="images/rock.png" alt="Jugar usando piedra">
+        </button>
+        <button data-choice="papel">
+            <img src="images/paper.png" alt="Jugar usando papel">
+        </button>
+        <button data-choice="tijeras">
+            <img src="images/scissors.png" alt="Jugando usando tijeras">
+        </button>
+    </section>
+    </section>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

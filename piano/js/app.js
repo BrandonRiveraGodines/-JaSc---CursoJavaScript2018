@@ -6,7 +6,6 @@ buttons.forEach(
 function playSound(event){
   const button = event.target;
   const note = button.dataset.note;
-  console.log(note);
   const audio = document.getElementById(`audio${note}`);
   audio.pause();
   audio.currentTime = 0;

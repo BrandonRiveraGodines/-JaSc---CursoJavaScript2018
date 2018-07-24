@@ -5,11 +5,12 @@ const head = {
     x: 0,
     y: 0
 };
+const body = [];
 let food = null;
 let dy = 0;
 let dx = 0;
 
-setInterval(main, 1000);
+setInterval(main, 100);
 
 function main() {
     update(); // actualizar las variables del juego
@@ -17,11 +18,31 @@ function main() {
 }
 
 function update() {
+    let prevX, prevY;
+    if(body.length >= 1){
+        prevX = body[body.length-1].x;
+        prevY = body[body.length-1].y;
+    } else {
+        prevX = head.x;
+        prevY = head.y;
+    }
+
+    for (let i = body.length-1; i >= 1; --i) {
+        body[i].x = body[i-1].x;
+        body[i].y = body[i-1].y; // El elemento 3 <- elemento 2
+    }
+
+    if (body.length >= 1) {
+        body[0].x = head.x;
+        body[0].y = head.y;
+    }
+
     head.x += dx;
     head.y += dy;
 
     if (food && head.x === food.x && head.y === food.y) {
         food = null;
+        increaseSnakeSize(prevX, prevY);
     }
 
     if (!food) {
@@ -29,6 +50,12 @@ function update() {
             x: getRandomX(), y: getRandomY()
         };
     }
+}
+
+function increaseSnakeSize(prevX, prevY) {
+    body.push({
+        x: prevX, y: prevY
+    });
 }
 
 function getRandomX() {
@@ -42,7 +69,10 @@ function getRandomY() {
 function draw() {
     context.fillStyle = 'black';
     context.fillRect(0, 0, myCanvas.width, myCanvas.height);
-    drawObject(head, 'lime');
+    drawObject(head, 'orange');
+    body.forEach(
+        elem => drawObject(elem, 'lime')
+    );
     drawObject(food, 'white');
 }
 

@@ -53,6 +53,7 @@ function update() {
             x: getRandomX(), y: getRandomY()
         };
     }
+
 }
 
 function checkSnakeCollision() {
@@ -66,11 +67,11 @@ function checkSnakeCollision() {
     const botomCollision = (head.y > 480);
     const leftColision = (head.x < 0);
     const rightCollision = (head.x > 480);
-    if(topCollision || botomCollision || leftColision || rightCollision){
+    if (topCollision || botomCollision || leftColision || rightCollision) {
         alert('Has perdido');
         head.x = 0;
         head.y = 0;
-        dy = 0; dx = 0; 
+        dy = 0; dx = 0;
         body = [];
     }
 }
@@ -81,7 +82,7 @@ function increaseSnakeSize(prevX, prevY) {
     });
 }
 
-function gameOver(){
+function gameOver() {
 
 }
 

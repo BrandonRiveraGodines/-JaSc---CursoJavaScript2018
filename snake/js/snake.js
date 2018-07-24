@@ -18,18 +18,21 @@ function main() {
 }
 
 function update() {
+
+    checkSnakeCollision();
+
     let prevX, prevY;
-    if(body.length >= 1){
-        prevX = body[body.length-1].x;
-        prevY = body[body.length-1].y;
+    if (body.length >= 1) {
+        prevX = body[body.length - 1].x;
+        prevY = body[body.length - 1].y;
     } else {
         prevX = head.x;
         prevY = head.y;
     }
 
-    for (let i = body.length-1; i >= 1; --i) {
-        body[i].x = body[i-1].x;
-        body[i].y = body[i-1].y; // El elemento 3 <- elemento 2
+    for (let i = body.length - 1; i >= 1; --i) {
+        body[i].x = body[i - 1].x;
+        body[i].y = body[i - 1].y; // El elemento 3 <- elemento 2
     }
 
     if (body.length >= 1) {
@@ -52,10 +55,34 @@ function update() {
     }
 }
 
+function checkSnakeCollision() {
+    for (let i = 0; i < body.length; ++i) { //Las coordenadas de la cabeza sean igual a las coordenadas del cuerpo de la serpiente
+        if (head.x == body[i].x && head.y == body[i].y) {
+            alert('Has perdido');
+        }
+    }
+
+    const topCollision = (head.y < 0);
+    const botomCollision = (head.y > 480);
+    const leftColision = (head.x < 0);
+    const rightCollision = (head.x > 480);
+    if(topCollision || botomCollision || leftColision || rightCollision){
+        alert('Has perdido');
+        head.x = 0;
+        head.y = 0;
+        dy = 0; dx = 0; 
+        body = [];
+    }
+}
+
 function increaseSnakeSize(prevX, prevY) {
     body.push({
         x: prevX, y: prevY
     });
+}
+
+function gameOver(){
+
 }
 
 function getRandomX() {
@@ -88,23 +115,31 @@ function moveSnake(event) {
     switch (event.key) {
         case 'ArrowUp':
             console.log('Mover hacía arriba');
-            dx = 0;
-            dy = -SIZE;
+            if (dy === 0) {
+                dx = 0;
+                dy = -SIZE;
+            }
             break;
         case 'ArrowDown':
             console.log('Mover hacía abajo');
-            dx = 0;
-            dy = SIZE;
+            if (dy === 0) {
+                dx = 0;
+                dy = SIZE;
+            }
             break;
         case 'ArrowRight':
             console.log('Mover a la derecha');
-            dx = SIZE;
-            dy = 0;
+            if (dx === 0) {
+                dx = SIZE;
+                dy = 0;
+            }
             break;
         case 'ArrowLeft':
             console.log('Mover a la izquierda');
-            dx = -SIZE;
-            dy = 0;
+            if (dx === 0) {
+                dx = -SIZE;
+                dy = 0;
+            }
             break;
     }
 }
